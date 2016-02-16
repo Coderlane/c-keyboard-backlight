@@ -17,14 +17,14 @@
 #include "keyboard_backlight_internal.h"
 
 /**
- * @brief Create a new generic keyboard backlight object.
+ * @brief Create a new generic keyboard backlight controller object.
  *
  *
- * @param device The udev device that represents this keyboard backlight. This
- * device will be referenced internally.
- * @param type The type of the keyboard backlight.
- * @param ctx A context for the specific type of keyboard backlight. This
- * memory must be externally tracked.
+ * @param device The udev device that represents this keyboard backlight
+ * controller. This device will be referenced internally.
+ * @param type The type of the keyboard backlight controller.
+ * @param ctx A context for the specific type of keyboard backlight
+ * controller. This memory must be externally tracked.
  *
  * @return A new generic keyboard  backlight object initialized with the
  * specified input. However, all of the capabilities are not yet initalized.
@@ -47,11 +47,11 @@ kb_controller_new(struct udev_device *device,
 }
 
 /**
- * @brief Destroy a generic keyboard backlight object.
+ * @brief Destroy a generic keyboard backlight controller object.
  *
  * Unref's the udev_device.
  *
- * @param kb_ptr A pointer to a pointer to a keyboard backlight.
+ * @param kb_ptr A pointer to a pointer to a keyboard backlight controller.
  */
 void
 kb_controller_delete(struct kb_controller **kb_ptr)
@@ -68,9 +68,10 @@ kb_controller_delete(struct kb_controller **kb_ptr)
 }
 
 /**
- * @brief Find the first avalibale keyboard backlight.
+ * @brief Find the first avalibale keyboard backlight controller.
  *
- * @return The first keyboard backlight found or NULL if none are found.
+ * @return The first keyboard backlight controller found or
+ * NULL if none are found.
  */
 struct kb_controller *kb_controller_find_first()
 {
@@ -80,13 +81,14 @@ struct kb_controller *kb_controller_find_first()
 
 
 /**
- * @brief Get the current brightness of a keyboard backlight.
+ * @brief Get the current brightness of a keyboard backlight controller.
  *
- * @param kb The keyboard backlight to get the brightness of.
- * @param out_brightness The current brightness of the keyboard backlight.
+ * @param kb The keyboard backlight controller to get the brightness of.
+ * @param out_brightness The current brightness of the keyboard
+ * backlight controller.
  *
  * @return 0 on success, !0 on failure.
- * ENOTSUP: The keyboard backlight does not support this operation.
+ * ENOTSUP: The keyboard backlight controller does not support this operation.
  */
 int
 kb_controller_get_brightness(struct kb_controller *kb, int *out_brightness)
@@ -102,13 +104,13 @@ kb_controller_get_brightness(struct kb_controller *kb, int *out_brightness)
 }
 
 /**
- * @brief Set the current brightness of a keyboard backlight.
+ * @brief Set the current brightness of a keyboard backlight controller.
  *
- * @param kb The keyboard backlight to set the brightness of.
- * @param brightness The new brightness of the keyboard backlight.
+ * @param kb The keyboard backlight controller to set the brightness of.
+ * @param brightness The new brightness of the keyboard backlight controller.
  *
  * @return 0 on success, !0 on failure.
- * ENOTSUP: The keyboard backlight does not support this operation.
+ * ENOTSUP: The keyboard backlight controller does not support this operation.
  */
 int
 kb_controller_set_brightness(struct kb_controller *kb, int brightness)
@@ -123,13 +125,13 @@ kb_controller_set_brightness(struct kb_controller *kb, int brightness)
 }
 
 /**
- * @brief Get the max brightness of a keyboard backlight.
+ * @brief Get the max brightness of a keyboard backlight controller.
  *
- * @param kb The keyboard backlight to get the max brightness of.
- * @param out_max The maximum brightness of the keyboard backlight.
+ * @param kb The keyboard backlight controller to get the max brightness of.
+ * @param out_max The maximum brightness of the keyboard backlight controller.
  *
  * @return 0 on success, !0 on failure.
- * ENOTSUP: The keyboard backlight does not support this operation.
+ * ENOTSUP: The keyboard backlight controller does not support this operation.
  */
 int
 kb_controller_get_max_brightness(struct kb_controller *kb, int *out_max)
@@ -145,13 +147,16 @@ kb_controller_get_max_brightness(struct kb_controller *kb, int *out_max)
 }
 
 /**
- * @brief Get the steps in brightness that a keyboard backlight supports.
+ * @brief Get the steps in brightness that a keyboard
+ * backlight controller supports.
  *
- * @param kb The keyboard backlight to get the supported steps in brightness of.
- * @param out_step The steps in brightness that a keyboard backlight supports.
+ * @param kb The keyboard backlight controller to get the
+ * supported steps in brightness of.
+ * @param out_step The steps in brightness that a keyboard
+ * backlight controller supports.
  *
  * @return 0 on success, !0 on failure.
- * ENOTSUP: The keyboard backlight does not support this operation.
+ * ENOTSUP: The keyboard backlight controller does not support this operation.
  */
 int
 kb_controller_get_step_brightness(struct kb_controller *kb, int *out_step)
