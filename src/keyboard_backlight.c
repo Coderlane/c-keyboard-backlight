@@ -68,6 +68,18 @@ kb_keyboard_delete(struct kb_keyboard **kb_ptr)
 }
 
 /**
+ * @brief Find the first avalibale keyboard backlight.
+ *
+ * @return The first keyboard backlight found or NULL if none are found.
+ */
+struct kb_keyboard *kb_keyboard_find_first()
+{
+
+  return NULL;
+}
+
+
+/**
  * @brief Get the current brightness of a keyboard backlight.
  *
  * @param kb The keyboard backlight to get the brightness of.

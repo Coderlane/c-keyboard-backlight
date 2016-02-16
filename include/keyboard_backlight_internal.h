@@ -10,7 +10,7 @@
 #define KB_KEYBOARD_BACKLIGHT_INTERNAL_H
 
 enum kb_keyboard_type {
-  KBKT_DELL_9350 = 1,
+  KBKT_XPS_9350 = 1,
 };
 
 typedef int (*kb_get_int_func)(struct kb_keyboard *, int *);
@@ -29,8 +29,11 @@ struct kb_keyboard {
   void  *kbk_ctx;
 };
 
+/* Generic Keyboard Functions */
 struct kb_keyboard *kb_keyboard_new(struct udev_device *device,
     enum kb_keyboard_type type, void *ctx);
-void kb_keyboard_delete(struct kb_keyboard **kbk_ptr);
+
+/* Specific Keyboard Creation Functions */
+struct kb_keyboard *kb_keyboard_xps_9350_new(struct udev_device *device);
 
 #endif /* _KB_KEYBOARD_BACKLIGHT_INTERNAL_H */

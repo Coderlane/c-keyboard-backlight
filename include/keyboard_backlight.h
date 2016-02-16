@@ -11,6 +11,9 @@
 
 struct kb_keyboard;
 
+struct kb_keyboard *kb_keyboard_find_first();
+void kb_keyboard_delete(struct kb_keyboard **kbk_ptr);
+
 int kb_keyboard_get_brightness(struct kb_keyboard *kb, int *out_brightness);
 int kb_keyboard_set_brightness(struct kb_keyboard *kb, int brightness);
 
