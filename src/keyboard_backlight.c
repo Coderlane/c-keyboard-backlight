@@ -16,6 +16,14 @@
 #include "keyboard_backlight.h"
 #include "keyboard_backlight_internal.h"
 
+static kb_find_first_func kb_find_first_funcs[] = {
+  kb_controller_xps_9350_find_first
+};
+
+static kb_new_func kb_new_funcs[] = {
+  kb_controller_xps_9350_new
+};
+
 /**
  * @brief Create a new generic keyboard backlight controller object.
  *
@@ -73,10 +81,28 @@ kb_controller_delete(struct kb_controller **kb_ptr)
  * @return The first keyboard backlight controller found or
  * NULL if none are found.
  */
-struct kb_controller *kb_controller_find_first()
+struct kb_controller *kb_controller_find_first(struct udev *udev_ctx)
 {
+  struct udev_device *dev;
+  struct kb_controller *kb = NULL;
 
-  return NULL;
+  for(enum kb_controller_type type = 0; type < KBCT_MAX; type++) {
+    dev = kb_find_first_funcs[type](udev_ctx);
+
+    if (dev != NULL) {
+      /* Found a possible device, try to create it. */
+      kb = kb_new_funcs[type](dev);
+      udev_device_unref(dev);
+
+      if (kb != NULL) {
+        /* Success! Just return now. */
+        goto out;
+      }
+    }
+  }
+
+out:
+  return kb;
 }
 
 
